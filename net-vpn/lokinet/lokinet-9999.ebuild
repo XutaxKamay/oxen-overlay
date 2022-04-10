@@ -50,7 +50,6 @@ src_configure() {
 		-DWITH_TESTS=$(usex test ON OFF)
 		-DWITH_HIVE=$(usex hive ON OFF)
 		-DSTATIC_LINK=$(usex static ON OFF)
-		-DWITH_LTO=OFF # https://github.com/oxen-io/lokinet/pull/1843, needs to be removed next version
 		-DWITH_BOOTSTRAP=$(usex bootstrap ON OFF)
 		-DWITH_SETCAP=$(usex setcap ON OFF)
 	)
