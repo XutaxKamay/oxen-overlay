@@ -27,6 +27,8 @@ DEPEND="dev-vcs/git
 
 RDEPEND="${DEPEND}"
 
+PATCHES=( "${FILESDIR}/compatibility.patch" )
+
 src_prepare() {
 	cmake_src_prepare
 }

@@ -13,7 +13,7 @@ EGIT_REPO_URI='https://github.com/oxen-io/oxen-core'
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
-IUSE="coverage docs readline test"
+IUSE="coverage docs readline"
 
 DEPEND="dev-vcs/git
 	dev-util/cmake
@@ -46,7 +46,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DWARNINGS_AS_ERRORS=ON
 		-DBUILD_DOCUMENTATION=$(usex docs ON OFF)
-		-DBUILD_TESTS=$(usex test ON OFF)
+		-DBUILD_TESTS=OFF # $(usex test ON OFF)
 		#-DBUILD_64=$(usex ... detect 64/32 bit arch here ...)
 		-DBUILD_SHARED_LIBS=ON
 		-DCOVERAGE=$(usex coverage ON OFF)
