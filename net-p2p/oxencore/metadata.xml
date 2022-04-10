@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>admin@xutaxkamay.com</email>
+    <name>xutaxkamay</name>
+  </maintainer>
+  <use>
+    <flag name="coverage">Enable profiling for test coverage report</flag>
+  </use>
+</pkgmetadata>
