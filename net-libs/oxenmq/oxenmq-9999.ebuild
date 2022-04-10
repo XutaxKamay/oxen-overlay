@@ -15,7 +15,7 @@ EGIT_REPO_URI='https://github.com/oxen-io/oxen-mq'
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
-IUSE="debug static test"
+IUSE="test"
 
 DEPEND="dev-vcs/git
 	dev-util/cmake
@@ -27,10 +27,6 @@ DEPEND="dev-vcs/git
 
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/oxenmq-9999-cmake_catch2_test.patch
-)
-
 src_prepare() {
 	cmake_src_prepare
 }
@@ -39,9 +35,9 @@ src_configure() {
 
 	local mycmakeargs=(
 		-DWARNINGS_AS_ERRORS=ON
-		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
-		-DBUILD_SHARED_LIBS=$(usex static OFF ON)
+		-DBUILD_SHARED_LIBS=ON
 		-DOXENMQ_INSTALL_CPPZMQ=OFF
+		-DOXENMQ_BUILD_TESTS=$(usex test ON OFF)
 	)
 
 	cmake_src_configure

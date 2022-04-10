@@ -12,15 +12,11 @@ HOMEPAGE="https://oxen.io"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
-IUSE="debug test"
+IUSE="test"
 
 DEPEND="test? ( >=dev-cpp/catch-2 )"
 
 RDEPEND="${DEPEND}"
-
-PATCHES=(
-	"${FILESDIR}"/oxenc-9999-no_test.patch
-)
 
 src_prepare() {
 	cmake_src_prepare
@@ -29,7 +25,7 @@ src_prepare() {
 src_configure() {
 
 	local mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
+		-DOXENC_BUILD_TESTS=$(usex test ON OFF)
 	)
 
 	cmake_src_configure

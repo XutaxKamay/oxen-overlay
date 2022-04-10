@@ -16,11 +16,11 @@ EGIT_REPO_URI='https://github.com/oxen-io/lokinet'
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
-IUSE="cpu_flags_x86_avx2 bootstrap coverage debug embedded hive jemalloc liblokinet netns setcap shadow static testnet test"
+IUSE="cpu_flags_x86_avx2 bootstrap coverage debug embedded hive jemalloc liblokinet netns setcap shadow testnet test"
 
 DEPEND="dev-vcs/git
 	dev-util/cmake
-	>=dev-libs/libuv-1.27.0
+	>=dev-libs/libuv-1.27
 	bootstrap? ( dev-libs/openssl net-misc/curl )
 	sys-libs/libunwind
 	net-dns/unbound
@@ -38,7 +38,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DWARNINGS_AS_ERRORS=ON
 		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
-		-DBUILD_SHARED_LIBS=$(usex static OFF ON)
+		-DBUILD_SHARED_LIBS=ON
 		-DUSE_AVX2=$(usex cpu_flags_x86_avx2 ON OFF)
 		-DUSE_NETNS=$(usex netns ON OFF)
 		-DEMBEDDED_CFG=$(usex embedded ON OFF)
@@ -49,7 +49,6 @@ src_configure() {
 		-DWITH_COVERAGE=$(usex coverage ON OFF)
 		-DWITH_TESTS=$(usex test ON OFF)
 		-DWITH_HIVE=$(usex hive ON OFF)
-		-DSTATIC_LINK=$(usex static ON OFF)
 		-DWITH_BOOTSTRAP=$(usex bootstrap ON OFF)
 		-DWITH_SETCAP=$(usex setcap ON OFF)
 	)
