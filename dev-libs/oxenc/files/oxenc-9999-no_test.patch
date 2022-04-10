@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8fb052d..3e10299 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -91,7 +91,3 @@ endif()
+ if(OXENC_BUILD_DOCS)
+   add_subdirectory(docs)
+ endif()
+-
+-if(OXENC_BUILD_TESTS)
+-  add_subdirectory(tests)
+-endif()

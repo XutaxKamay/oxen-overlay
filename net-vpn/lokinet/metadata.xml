@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>admin@xutaxkamay.com</email>
+    <name>xutaxkamay</name>
+  </maintainer>
+  <use>
+    <flag name="bootstrap">Bootstrapper for Lokinet configuration (recommended)</flag>
+    <flag name="coverage">Generate coverage data</flag>
+    <flag name="embedded">Optimize for older hardware or embedded systems</flag>
+    <flag name="hive">Build simulation stubs</flag>
+    <flag name="liblokinet">Build library for Lokinet</flag>
+    <flag name="netns"> Build simulation stubs</flag>
+    <flag name="setcap">Set capibilities for Lokinet on installation (recommended)</flag>
+    <flag name="shadow">Use shadow testing framework</flag>
+    <flag name="testnet">Testnet build</flag>
+  </use>
+</pkgmetadata>
