@@ -33,7 +33,8 @@ DEPEND="dev-vcs/git
 	dev-qt/linguist-tools:5
 	dev-libs/hidapi
 	dev-libs/libusb
-	dev-libs/protobuf"
+	dev-libs/protobuf
+	>=net-libs/miniupnpc-2.1"
 
 RDEPEND="${DEPEND}"
 
