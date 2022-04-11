@@ -25,7 +25,7 @@ DEPEND="dev-vcs/git
 	>=net-dns/unbound-1.4.16
 	net-libs/oxenmq
 	dev-db/sqlite:3
-	app-arch/lzma
+	app-arch/xz-utils
 	>=sys-libs/readline-6.3.0
 	>=net-libs/ldns-1.6.17
 	>=dev-libs/expat-1.1
