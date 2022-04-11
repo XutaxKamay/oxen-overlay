@@ -48,7 +48,7 @@ src_configure() {
 		-DBUILD_DOCUMENTATION=$(usex docs ON OFF)
 		-DBUILD_TESTS=OFF # $(usex test ON OFF)
 		#-DBUILD_64=$(usex ... detect 64/32 bit arch here ...)
-		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_SHARED_LIBS=OFF # right now, we prefer static cause too much libs ...
 		-DCOVERAGE=$(usex coverage ON OFF)
 		-DUSE_READLINE=$(usex readline ON OFF)
 	)
