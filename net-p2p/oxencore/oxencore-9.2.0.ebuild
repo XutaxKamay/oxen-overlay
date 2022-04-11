@@ -9,10 +9,11 @@ DESCRIPTION="Lokinet is an anonymous, decentralized and IP based overlay network
 HOMEPAGE="https://oxen.io"
 
 EGIT_REPO_URI='https://github.com/oxen-io/oxen-core'
+EGIT_COMMIT="v${PV}"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
 IUSE="coverage docs readline"
 
 DEPEND="dev-vcs/git
