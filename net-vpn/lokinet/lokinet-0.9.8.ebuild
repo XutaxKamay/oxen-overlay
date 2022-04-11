@@ -23,7 +23,9 @@ DEPEND="dev-vcs/git
 	sys-libs/libunwind
 	net-dns/unbound
 	net-libs/zeromq
-	dev-db/sqlite:3"
+	dev-db/sqlite:3
+	acct-user/oxen
+	acct-group/oxen"
 
 RDEPEND="${DEPEND}"
 

@@ -35,7 +35,9 @@ DEPEND="dev-vcs/git
 	dev-libs/hidapi
 	dev-libs/libusb
 	dev-libs/protobuf
-	>=net-libs/miniupnpc-2.1"
+	>=net-libs/miniupnpc-2.1
+	acct-user/oxen
+	acct-group/oxen"
 
 RDEPEND="${DEPEND}"
 
