@@ -15,7 +15,7 @@ EGIT_COMMIT="v${PV}"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
-IUSE="coverage daemon docs readline"
+IUSE="coverage daemon doc readline"
 
 DEPEND="dev-vcs/git
     dev-util/cmake
@@ -52,7 +52,7 @@ src_configure() {
 
     local mycmakeargs=(
         -DWARNINGS_AS_ERRORS=ON
-        -DBUILD_DOCUMENTATION=$(usex docs ON OFF)
+        -DBUILD_DOCUMENTATION=$(usex doc ON OFF)
         -DBUILD_TESTS=OFF # $(usex test ON OFF)
         #-DBUILD_64=$(usex ... detect 64/32 bit arch here ...)
         -DBUILD_SHARED_LIBS=OFF # right now, we prefer static cause too much libs ...
