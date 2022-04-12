@@ -16,8 +16,7 @@ SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
 IUSE="cpu_flags_x86_avx2 coverage debug embedded hive jemalloc liblokinet netns shadow testnet test"
 
-DEPEND="app-misc/screen
-    dev-vcs/git
+DEPEND="dev-vcs/git
 	dev-util/cmake
 	>=dev-libs/libuv-1.27
 	dev-libs/openssl
