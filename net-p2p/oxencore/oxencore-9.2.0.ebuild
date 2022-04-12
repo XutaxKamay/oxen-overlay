@@ -54,8 +54,15 @@ src_configure() {
         -DWARNINGS_AS_ERRORS=ON
         -DBUILD_DOCUMENTATION=$(usex doc ON OFF)
         -DBUILD_TESTS=OFF # $(usex test ON OFF)
-        #-DBUILD_64=$(usex ... detect 64/32 bit arch here ...)
-        -DBUILD_SHARED_LIBS=OFF # right now, we prefer static cause too much libs ...
+        # -DBUILD_64=$(usex ... detect 64/32 bit arch here ...)
+        # Should be =ON but depends on liboxenmq which LokiNET depends,
+        # but oxen-core relies on an older version of it which will make
+        # conflicts, on top of that it does not use yet oxen-encoding.
+        # oxen-encoding is not used for LokiNET as-well, but will do in future release.
+        # Once a future release comes, I will make an ebuild for both of them,
+        # So we can finally use =ON, but oxen-core also still relies on a lot of
+        # external libraries so it might be just as good to statically link for now.
+        -DBUILD_SHARED_LIBS=OFF
         -DCOVERAGE=$(usex coverage ON OFF)
         -DUSE_READLINE=$(usex readline ON OFF)
     )

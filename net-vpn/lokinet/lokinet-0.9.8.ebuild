@@ -47,7 +47,9 @@ src_configure() {
     local mycmakeargs=(
         -DWARNINGS_AS_ERRORS=ON
         -DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
-        # That will install liboxenmq, =OFF can't be used
+        # That will install liboxenmq, =ON can't be used yet,
+        # I will wait for a more stable release to do,
+        # libraries ebuild.
         -DBUILD_SHARED_LIBS=OFF
         -DUSE_AVX2=$(usex cpu_flags_x86_avx2 ON OFF)
         -DUSE_NETNS=$(usex netns ON OFF)
@@ -68,11 +70,11 @@ src_configure() {
 
 src_install() {
     if use daemon; then
-	    # OpenRC
-	    newconfd "${FILESDIR}/lokinet.conf" lokinet
-	    newinitd "${FILESDIR}/lokinet.init" lokinet
+        # OpenRC
+        newconfd "${FILESDIR}/lokinet.conf" lokinet
+        newinitd "${FILESDIR}/lokinet.init" lokinet
 
-	    # systemd is not supported yet
+        # systemd is not supported yet
     fi
 
     cmake_src_install
