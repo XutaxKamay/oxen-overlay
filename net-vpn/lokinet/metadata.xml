@@ -7,6 +7,7 @@
   </maintainer>
   <use>
     <flag name="coverage">Generate coverage data</flag>
+    <flag name="daemon">Install daemon scripts</flag>
     <flag name="embedded">Optimize for older hardware or embedded systems</flag>
     <flag name="hive">Build simulation stubs</flag>
     <flag name="liblokinet">Build library for Lokinet</flag>

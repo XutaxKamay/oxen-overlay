@@ -14,7 +14,7 @@ SRC_URI="https://github.com/oxen-io/lokinet/releases/download/v${PV}/${PKG_TB}"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
-IUSE="cpu_flags_x86_avx2 coverage debug embedded hive jemalloc liblokinet netns shadow testnet test"
+IUSE="cpu_flags_x86_avx2 coverage daemon debug embedded hive jemalloc liblokinet netns shadow testnet test"
 
 DEPEND="dev-vcs/git
     dev-util/cmake
@@ -67,11 +67,13 @@ src_configure() {
 }
 
 src_install() {
-    # OpenRC
-    newconfd "${FILESDIR}/lokinet.conf" lokinet
-    newinitd "${FILESDIR}/lokinet.init" lokinet
+    if use daemon; then
+	    # OpenRC
+	    newconfd "${FILESDIR}/lokinet.conf" lokinet
+	    newinitd "${FILESDIR}/lokinet.init" lokinet
 
-    # systemd is not supported yet
+	    # systemd is not supported yet
+    fi
 
     cmake_src_install
 }
