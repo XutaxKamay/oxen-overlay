@@ -17,61 +17,61 @@ KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
 IUSE="cpu_flags_x86_avx2 coverage debug embedded hive jemalloc liblokinet netns shadow testnet test"
 
 DEPEND="dev-vcs/git
-	dev-util/cmake
-	>=dev-libs/libuv-1.27
-	dev-libs/openssl
-	net-misc/curl
-	sys-libs/libunwind
-	net-dns/unbound
-	net-libs/zeromq
-	dev-db/sqlite:3
-	acct-user/lokinet
-	acct-group/lokinet"
+    dev-util/cmake
+    >=dev-libs/libuv-1.27
+    dev-libs/openssl
+    net-misc/curl
+    sys-libs/libunwind
+    net-dns/unbound
+    net-libs/zeromq
+    dev-db/sqlite:3
+    acct-user/lokinet
+    acct-group/lokinet"
 
 RDEPEND="${DEPEND}"
 
-#PATCHES=( "{FILESDIR}/libzmq-9.8.0.patch" )
+PATCHES=( "${FILESDIR}/lokinet-0.9.8-libzmq.patch" )
 
 src_unpack() {
-	unpack ${PKG_TB}
-	# Respect Gentoo conventions
-	mv "${PN}-v${PV}" "${PN}-${PV}"||die
+    unpack ${PKG_TB}
+    # Respect Gentoo conventions
+    mv "${PN}-v${PV}" "${PN}-${PV}"||die
 }
 
 src_prepare() {
-	cmake_src_prepare
+    cmake_src_prepare
 }
 
 src_configure() {
 
-	local mycmakeargs=(
-		-DWARNINGS_AS_ERRORS=ON
-		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
-		# That will install liboxenmq, =OFF can't be used
-		-DBUILD_SHARED_LIBS=ON
-		-DUSE_AVX2=$(usex cpu_flags_x86_avx2 ON OFF)
-		-DUSE_NETNS=$(usex netns ON OFF)
-		-DEMBEDDED_CFG=$(usex embedded ON OFF)
-		-DBUILD_LIBLOKINET=$(usex liblokinet ON OFF)
-		-DSHADOW=$(usex shadow ON OFF)
-		-DUSE_JEMALLOC=$(usex jemalloc ON OFF)
-		-DTESTNET=$(usex testnet ON OFF)
-		-DWITH_COVERAGE=$(usex coverage ON OFF)
-		-DWITH_TESTS=$(usex test ON OFF)
-		-DWITH_HIVE=$(usex hive ON OFF)
-		-DWITH_BOOTSTRAP=ON
-		-DWITH_SETCAP=OFF
-	)
+    local mycmakeargs=(
+        -DWARNINGS_AS_ERRORS=ON
+        -DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
+        # That will install liboxenmq, =OFF can't be used
+        -DBUILD_SHARED_LIBS=OFF
+        -DUSE_AVX2=$(usex cpu_flags_x86_avx2 ON OFF)
+        -DUSE_NETNS=$(usex netns ON OFF)
+        -DEMBEDDED_CFG=$(usex embedded ON OFF)
+        -DBUILD_LIBLOKINET=$(usex liblokinet ON OFF)
+        -DSHADOW=$(usex shadow ON OFF)
+        -DUSE_JEMALLOC=$(usex jemalloc ON OFF)
+        -DTESTNET=$(usex testnet ON OFF)
+        -DWITH_COVERAGE=$(usex coverage ON OFF)
+        -DWITH_TESTS=$(usex test ON OFF)
+        -DWITH_HIVE=$(usex hive ON OFF)
+        -DWITH_BOOTSTRAP=ON
+        -DWITH_SETCAP=OFF
+    )
 
-	cmake_src_configure
+    cmake_src_configure
 }
 
 src_install() {
-	# OpenRC
+    # OpenRC
     newconfd "${FILESDIR}/lokinet.conf" lokinet
     newinitd "${FILESDIR}/lokinet.init" lokinet
 
     # systemd is not supported yet
 
-	cmake_src_install
+    cmake_src_install
 }

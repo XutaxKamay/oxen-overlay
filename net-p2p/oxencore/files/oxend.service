@@ -1,0 +1,17 @@
+[Unit]
+Description=OXEN P2P Daemon
+After=network.target
+
+[Service]
+User=oxen
+Group=oxen
+StateDirectory=oxen
+LogsDirectory=oxen
+Type=simple
+ExecStart=/usr/bin/oxend --config-file /etc/oxen/oxend.conf --non-interactive
+Restart=on-failure
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

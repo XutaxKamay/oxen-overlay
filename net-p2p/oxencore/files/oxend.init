@@ -1,0 +1,23 @@
+#!/sbin/openrc-run
+# Copyright 2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+command_args="${oxend_args}"
+command_user="oxen:oxen"
+command="/usr/bin/oxend"
+pidfile=/var/run/oxend.pid
+start_stop_daemon_args="-u oxen -b -m -p ${pidfile}"
+retry="SIGTERM/30"
+
+name="OXEN Daemon"
+description="Connects to the OXEN P2P network"
+
+depend() {
+    need localmount
+    need net
+}
+
+start_pre() {
+    checkpath --directory --owner oxen:oxen --mode 0755 \
+	      /var/lib/oxen /var/log/oxen
+}
