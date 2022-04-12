@@ -5,7 +5,7 @@ EAPI=8
 
 inherit cmake
 
-DESCRIPTION="Lokinet is an anonymous, decentralized and IP based overlay network that aims to be low-latency, high bandwidth and resistant to Sybil attacks."
+DESCRIPTION="LokiNET is an anonymous, decentralized and IP based overlay network that aims to be low-latency, high bandwidth and resistant to Sybil attacks."
 HOMEPAGE="https://lokinet.org"
 
 PKG_TB="${PN}-v${PV}.tar.xz"
@@ -14,20 +14,24 @@ SRC_URI="https://github.com/oxen-io/lokinet/releases/download/v${PV}/${PKG_TB}"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
-IUSE="cpu_flags_x86_avx2 bootstrap coverage debug embedded hive jemalloc liblokinet netns setcap shadow testnet test"
+IUSE="cpu_flags_x86_avx2 coverage debug embedded hive jemalloc liblokinet netns shadow testnet test"
 
-DEPEND="dev-vcs/git
+DEPEND="app-misc/screen
+    dev-vcs/git
 	dev-util/cmake
 	>=dev-libs/libuv-1.27
-	bootstrap? ( dev-libs/openssl net-misc/curl )
+	dev-libs/openssl
+	net-misc/curl
 	sys-libs/libunwind
 	net-dns/unbound
 	net-libs/zeromq
 	dev-db/sqlite:3
-	acct-user/oxen
-	acct-group/oxen"
+	acct-user/lokinet
+	acct-group/lokinet"
 
 RDEPEND="${DEPEND}"
+
+#PATCHES=( "{FILESDIR}/libzmq-9.8.0.patch" )
 
 src_unpack() {
 	unpack ${PKG_TB}
@@ -44,6 +48,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DWARNINGS_AS_ERRORS=ON
 		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
+		# That will install liboxenmq, =OFF can't be used
 		-DBUILD_SHARED_LIBS=ON
 		-DUSE_AVX2=$(usex cpu_flags_x86_avx2 ON OFF)
 		-DUSE_NETNS=$(usex netns ON OFF)
@@ -55,9 +60,19 @@ src_configure() {
 		-DWITH_COVERAGE=$(usex coverage ON OFF)
 		-DWITH_TESTS=$(usex test ON OFF)
 		-DWITH_HIVE=$(usex hive ON OFF)
-		-DWITH_BOOTSTRAP=$(usex bootstrap ON OFF)
-		-DWITH_SETCAP=$(usex setcap ON OFF)
+		-DWITH_BOOTSTRAP=ON
+		-DWITH_SETCAP=OFF
 	)
 
 	cmake_src_configure
+}
+
+src_install() {
+	# OpenRC
+    newconfd "${FILESDIR}/lokinet.conf" lokinet
+    newinitd "${FILESDIR}/lokinet.init" lokinet
+
+    # systemd is not supported yet
+
+	cmake_src_install
 }

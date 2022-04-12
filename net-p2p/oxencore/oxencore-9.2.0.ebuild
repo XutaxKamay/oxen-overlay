@@ -5,7 +5,8 @@ EAPI=8
 
 inherit cmake git-r3
 
-DESCRIPTION="Lokinet is an anonymous, decentralized and IP based overlay network that aims to be low-latency, high bandwidth and resistant to Sybil attacks."
+DESCRIPTION="OXEN Wallet & Daemon"
+
 HOMEPAGE="https://oxen.io"
 
 EGIT_REPO_URI='https://github.com/oxen-io/oxen-core'

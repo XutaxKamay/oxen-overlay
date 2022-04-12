@@ -1,0 +1,40 @@
+#!/sbin/openrc-run
+# Copyright 2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+command_args="${lokinet_args}"
+command_user="lokinet:lokinet"
+command_background=true
+pidfile=/var/run/lokinet.pid
+
+command="/usr/bin/lokinet"
+retry="SIGTERM/30"
+
+name="LokiNET Daemon"
+description="Starts the LokiNET router"
+
+depend() {
+    need localmount
+    need net
+}
+
+start_pre() {
+    # Check if ini file
+    if [ ! -f "/etc/lokinet.ini" ];
+    then
+        lokinet -g --config /etc/lokinet/lokinet.ini
+	chown -R lokinet:lokinet /etc/lokinet
+    fi
+
+    # Check if bootstrap file
+    if [ ! -f "/etc/lokinet/bootstrap.signed" ];
+    then
+        lokinet-bootstrap lokinet /etc/lokinet/bootstrap.signed
+	chown -R lokinet:lokinet /etc/lokinet
+    fi
+
+    checkpath --directory --owner lokinet:lokinet --mode 0775 \
+        /etc/lokinet
+
+    setcap cap_net_admin,cap_net_bind_service=+eip /usr/bin/lokinet
+}
