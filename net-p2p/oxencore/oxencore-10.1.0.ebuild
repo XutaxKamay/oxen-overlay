@@ -63,7 +63,7 @@ src_configure() {
         # Once a future release comes, I will make an ebuild for both of them,
         # So we can finally use =ON, but oxen-core also still relies on a lot of
         # external libraries so it might be just as good to statically link for now.
-        -DBUILD_SHARED_LIBS=OFF
+        -DBUILD_SHARED_LIBS=ON
         -DCOVERAGE=$(usex coverage ON OFF)
         -DUSE_READLINE=$(usex readline ON OFF)
     )
