@@ -43,7 +43,7 @@ DEPEND="dev-vcs/git
 
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/oxen-9.2.0-libzmq.patch" )
+# PATCHES=( "${FILESDIR}/oxen-9.2.0-libzmq.patch" )
 
 src_prepare() {
     cmake_src_prepare
