@@ -24,6 +24,7 @@ DEPEND="dev-vcs/git
     sys-libs/libunwind
     net-dns/unbound
     net-libs/zeromq
+	virtual/libcrypt
     dev-db/sqlite:3
     acct-user/lokinet
     acct-group/lokinet"

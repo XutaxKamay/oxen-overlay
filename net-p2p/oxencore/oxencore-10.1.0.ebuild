@@ -37,6 +37,7 @@ DEPEND="dev-vcs/git
     dev-libs/libusb
     dev-libs/protobuf
     >=net-libs/miniupnpc-2.1
+	virtual/libcrypt
     acct-user/oxen
     acct-group/oxen"
 
