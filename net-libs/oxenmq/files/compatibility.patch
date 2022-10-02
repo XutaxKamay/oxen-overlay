@@ -1,0 +1,21 @@
+diff --git a/oxenmq/bt_serialize.h b/oxenmq/bt_serialize.h
+index 07dca2e..f6d2e1e 100644
+--- a/oxenmq/bt_serialize.h
++++ b/oxenmq/bt_serialize.h
+@@ -34,15 +34,6 @@
+ 
+ namespace oxenmq {
+ 
+-using oxenc::bt_deserialize_invalid;
+-using oxenc::bt_deserialize_invalid_type;
+-using oxenc::bt_serializer;
+-using oxenc::bt_serialize;
+-using oxenc::bt_deserialize;
+-using oxenc::bt_get;
+-using oxenc::get_int;
+-using oxenc::get_tuple;
+-using oxenc::bt_dict_consumer;
+-using oxenc::bt_list_consumer;
++using namespace oxenc;
+ 
+ } // namespace oxenmq

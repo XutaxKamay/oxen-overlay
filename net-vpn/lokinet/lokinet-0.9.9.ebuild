@@ -23,7 +23,7 @@ DEPEND="dev-vcs/git
     net-misc/curl
     sys-libs/libunwind
     net-dns/unbound
-    net-libs/zeromq
+    net-libs/oxenmq
 	virtual/libcrypt
     dev-db/sqlite:3
     acct-user/lokinet
@@ -31,7 +31,7 @@ DEPEND="dev-vcs/git
 
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/lokinet-0.9.8-libzmq.patch" )
+PATCHES=( "${FILESDIR}/lokinet-0.9.9-versiontag.patch" )
 
 src_unpack() {
     unpack ${PKG_TB}
@@ -48,10 +48,7 @@ src_configure() {
     local mycmakeargs=(
         -DWARNINGS_AS_ERRORS=ON
         -DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
-        # That will install liboxenmq, =ON can't be used yet,
-        # I will wait for a more stable release to do,
-        # libraries ebuild.
-        -DBUILD_SHARED_LIBS=OFF
+        -DBUILD_SHARED_LIBS=ON
         -DUSE_AVX2=$(usex cpu_flags_x86_avx2 ON OFF)
         -DUSE_NETNS=$(usex netns ON OFF)
         -DEMBEDDED_CFG=$(usex embedded ON OFF)
@@ -64,6 +61,11 @@ src_configure() {
         -DWITH_HIVE=$(usex hive ON OFF)
         -DWITH_BOOTSTRAP=ON
         -DWITH_SETCAP=OFF
+		-DLOKINET_VERSIONTAG="v0.9.9"
+		### This will be fixed later when lokinet devs ###
+		### Will be updating the ipv6 compare with arrays ###
+		### in c++20 it becomes a deprecated feature ###
+		-DCMAKE_CXX_FLAGS="-Wno-array-compare"
     )
 
     cmake_src_configure

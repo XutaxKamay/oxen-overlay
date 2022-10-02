@@ -14,7 +14,7 @@ EGIT_COMMIT="v${PV}"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
+KEYWORDS="amd64 ~x86 ~arm64 ~arm ~mips ~mips64 ~ppc64"
 IUSE="coverage daemon doc readline"
 
 DEPEND="dev-vcs/git
@@ -25,7 +25,7 @@ DEPEND="dev-vcs/git
     net-misc/curl
     sys-libs/libunwind
     >=net-dns/unbound-1.4.16
-    net-libs/zeromq
+	net-libs/oxenmq
     dev-db/sqlite:3
     app-arch/xz-utils
     >=sys-libs/readline-6.3.0
@@ -43,8 +43,6 @@ DEPEND="dev-vcs/git
 
 RDEPEND="${DEPEND}"
 
-# PATCHES=( "${FILESDIR}/oxen-9.2.0-libzmq.patch" )
-
 src_prepare() {
     cmake_src_prepare
 }
@@ -56,13 +54,6 @@ src_configure() {
         -DBUILD_DOCUMENTATION=$(usex doc ON OFF)
         -DBUILD_TESTS=OFF # $(usex test ON OFF)
         # -DBUILD_64=$(usex ... detect 64/32 bit arch here ...)
-        # Should be =ON but depends on liboxenmq which LokiNET depends,
-        # but oxen-core relies on an older version of it which will make
-        # conflicts, on top of that it does not use yet oxen-encoding.
-        # oxen-encoding is not used for LokiNET as-well, but will do in future release.
-        # Once a future release comes, I will make an ebuild for both of them,
-        # So we can finally use =ON, but oxen-core also still relies on a lot of
-        # external libraries so it might be just as good to statically link for now.
         -DBUILD_SHARED_LIBS=ON
         -DCOVERAGE=$(usex coverage ON OFF)
         -DUSE_READLINE=$(usex readline ON OFF)

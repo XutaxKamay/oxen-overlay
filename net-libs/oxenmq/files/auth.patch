@@ -1,0 +1,17 @@
+diff --git a/oxenmq/auth.h b/oxenmq/auth.h
+index f5e7963..64bf2d0 100644
+--- a/oxenmq/auth.h
++++ b/oxenmq/auth.h
+@@ -62,9 +62,9 @@ inline constexpr std::string_view to_string(AuthLevel a) {
+ }
+ 
+ inline AuthLevel auth_from_string(std::string_view a) {
+-    if (a == "none") return AuthLevel::none;
+-    if (a == "basic") return AuthLevel::basic;
+-    if (a == "admin") return AuthLevel::admin;
++    if (a == std::string_view("none")) return AuthLevel::none;
++    if (a == std::string_view("basic")) return AuthLevel::basic;
++    if (a == std::string_view("admin")) return AuthLevel::admin;
+     return AuthLevel::denied;
+ }
+ 
