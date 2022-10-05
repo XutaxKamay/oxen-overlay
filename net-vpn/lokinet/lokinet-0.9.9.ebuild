@@ -24,7 +24,7 @@ DEPEND="dev-vcs/git
     sys-libs/libunwind
     net-dns/unbound
     net-libs/oxenmq
-	virtual/libcrypt
+    virtual/libcrypt
     dev-db/sqlite:3
     acct-user/lokinet
     acct-group/lokinet"
@@ -61,11 +61,11 @@ src_configure() {
         -DWITH_HIVE=$(usex hive ON OFF)
         -DWITH_BOOTSTRAP=ON
         -DWITH_SETCAP=OFF
-		-DLOKINET_VERSIONTAG="v0.9.9"
-		### This will be fixed later when lokinet devs ###
-		### Will be updating the ipv6 compare with arrays ###
-		### in c++20 it becomes a deprecated feature ###
-		-DCMAKE_CXX_FLAGS="-Wno-array-compare"
+        -DLOKINET_VERSIONTAG="v0.9.9"
+        ### This will be fixed later when lokinet devs ###
+        ### Will be updating the ipv6 compare with arrays ###
+        ### in c++20 it becomes a deprecated feature ###
+        -DCMAKE_CXX_FLAGS="-Wno-array-compare"
     )
 
     cmake_src_configure

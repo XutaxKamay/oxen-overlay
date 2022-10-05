@@ -25,7 +25,7 @@ DEPEND="dev-vcs/git
     net-misc/curl
     sys-libs/libunwind
     >=net-dns/unbound-1.4.16
-	net-libs/oxenmq
+    net-libs/oxenmq
     dev-db/sqlite:3
     app-arch/xz-utils
     >=sys-libs/readline-6.3.0
@@ -37,7 +37,7 @@ DEPEND="dev-vcs/git
     dev-libs/libusb
     dev-libs/protobuf
     >=net-libs/miniupnpc-2.1
-	virtual/libcrypt
+    virtual/libcrypt
     acct-user/oxen
     acct-group/oxen"
 
