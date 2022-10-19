@@ -54,7 +54,8 @@ src_configure() {
         -DBUILD_DOCUMENTATION=$(usex doc ON OFF)
         -DBUILD_TESTS=OFF # $(usex test ON OFF)
         # -DBUILD_64=$(usex ... detect 64/32 bit arch here ...)
-        -DBUILD_SHARED_LIBS=ON
+		# Off for now ...
+        -DBUILD_SHARED_LIBS=OFF
         -DCOVERAGE=$(usex coverage ON OFF)
         -DUSE_READLINE=$(usex readline ON OFF)
 		-DCMAKE_CXX_FLAGS="-Wno-stringop-overflow -Wno-return-type"
