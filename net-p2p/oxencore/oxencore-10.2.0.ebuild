@@ -57,6 +57,7 @@ src_configure() {
         -DBUILD_SHARED_LIBS=ON
         -DCOVERAGE=$(usex coverage ON OFF)
         -DUSE_READLINE=$(usex readline ON OFF)
+		-DCMAKE_CXX_FLAGS="-Wno-stringop-overflow -Wno-return-type"
     )
 
     cmake_src_configure
