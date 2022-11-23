@@ -1,0 +1,23 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 51c4076..4474198 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -205,6 +205,7 @@ if(OXENMQ_INSTALL)
+         oxenmq/message.h
+         oxenmq/oxenmq.h
+         oxenmq/pubsub.h
++        oxenmq/variant.h
+         ${CMAKE_CURRENT_BINARY_DIR}/oxenmq/version.h
+         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/oxenmq
+         )
+diff --git a/oxenmq/variant.h b/oxenmq/variant.h
+new file mode 100644
+index 0000000..ac8d0e6
+--- /dev/null
++++ b/oxenmq/variant.h
+@@ -0,0 +1,5 @@
++#pragma once
++
++// Compatibility shim for oxenc includes
++
++#include <oxenc/variant.h>

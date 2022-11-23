@@ -26,7 +26,7 @@ DEPEND="dev-vcs/git
 
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/auth.patch" )
+PATCHES=( "${FILESDIR}/auth.patch" "${FILESDIR}/variant.patch")
 
 src_unpack() {
     unpack ${PKG_TB}

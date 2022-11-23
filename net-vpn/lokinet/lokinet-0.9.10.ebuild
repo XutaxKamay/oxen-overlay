@@ -31,8 +31,6 @@ DEPEND="dev-vcs/git
 
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/lokinet-0.9.9-versiontag.patch" )
-
 src_unpack() {
     unpack ${PKG_TB}
     # Respect Gentoo conventions
