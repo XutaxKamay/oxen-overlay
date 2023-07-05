@@ -20,6 +20,7 @@ DEPEND="dev-vcs/git
     dev-util/cmake
     >=dev-libs/libuv-1.27
     dev-libs/openssl
+    dev-libs/spdlog
     net-misc/curl
     sys-libs/libunwind
     net-dns/unbound
